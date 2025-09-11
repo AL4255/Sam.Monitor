@@ -1,8 +1,44 @@
 version: '3.8'
 
-
 services:
-
-
+  # PostgreSQL for logging access attempts
   postgres:
-  envrie
+    image: postgres:15-alpine
+    container_name: security_db
+    environment:
+      - POSTGRES_DB=security_log
+      - POSTGRES_USER=monitor
+      - POSTGRES_PASSWORD=monitor123
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - security_net
+
+  # Security Monitor - watches Samba logs and enforces rules
+  security_monitor:
+    build: ./monitor
+    container_name: file_monitor
+    volumes:
+      - /var/log/samba:/samba_logs:ro
+      - /etc/samba:/samba_config:ro
+      - ./restricted_files.txt:/app/restricted_files.txt:ro
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=monitor
+      - DB_PASS=monitor123
+      - DB_NAME=security_log
+    networks:
+      - security_net
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    # Need privileged mode to disconnect Samba sessions
+    privileged: true
+
+networks:
+  security_net:
+    driver: bridge
+
+volumes:
+  db_data:
