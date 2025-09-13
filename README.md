@@ -1,4 +1,4 @@
-samba Active Directory File Server with Python File Monitor
+Samba Active Directory File Server with Python File Monitor
 This project provides a Samba Active Directory domain controller with file sharing capabilities and a Python-based file access monitoring system for tracking file operations, user access patterns, and security auditing.
 Overview
 
@@ -16,5 +16,3 @@ Minimum 4GB RAM, 8GB recommended
 100GB+ storage space for files
 Static IP address configured
 Python 3.8+
-
-Required Packages
