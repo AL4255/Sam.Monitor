@@ -1,1 +1,6 @@
 #this is for creating a the monitor container 
+FROM python:3.11-alpine
+RUN pip install psycopg2-binary
+WORKDIR /app
+COPY monitor.py .
+CMD ["python", "monitor.py"]
