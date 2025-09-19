@@ -16,3 +16,8 @@ Minimum 4GB RAM, 8GB recommended
 100GB+ storage space for files
 Static IP address configured
 Python 3.8+
+
+
+
+
+# the main thing this project is showing is how to use python to do some log parsing to send logs to a central database and store them ina table to easly query
