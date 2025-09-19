@@ -1,3 +1,6 @@
+
+# making a comment to come back and get this working , right nwo this is just running two contianer but i ahve made some canges and will be workng on getting them uo and running
+
 version: '3.8'
 
 services:
